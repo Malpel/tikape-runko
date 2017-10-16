@@ -14,7 +14,13 @@ public class Main {
         
 
         AnnosDao opiskelijaDao = new AnnosDao(database);
-
+        
+        
+        
+        
+        
+        
+        /*
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "tervehdys");
@@ -35,5 +41,6 @@ public class Main {
 
             return new ModelAndView(map, "opiskelija");
         }, new ThymeleafTemplateEngine());
+        */
     }
 }
