@@ -7,15 +7,15 @@
     </head>
 
     <body>
-        <h1>Tervetuloa</h1> <br/>
         <h2>Smoothielista</h2><br/>
         <ul>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}">jotain?</span></li>
+                <span th:text="${annos.nimi}">smoothie</span></li>
         </ul>
 
-        
-        <p><a href="/smoothiet">Lisää uusi tai muokkaa vanhoja</a></p>
-        <p><a href="/ainekset">Raaka-aineet</a></p>
+        <ul>
+        <li><a href="/smoothiet">Lisää uusi tai muokkaa vanhoja</a></li>
+        <li><a href="/ainekset">Raaka-aineet</a></li>
+        </ul>
     </body>
 </html>

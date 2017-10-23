@@ -1,0 +1,40 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <h2>Smoothiet</h2>
+
+        <ul th:each="annos: ${annokset}">
+            <li><span th:text="${annos.nimi}">smoothie</span></li>
+        </ul>
+
+        <h4>Lisää uusi</h4>
+
+        <form method="POST">
+            Smoothien nimi:<br/>
+            <input type="text" name="smoothie"/><br/>
+            <input type="submit" value="Lisää"/><br/>
+        </form>
+
+        <h4>Lisää raaka-aineita</h4>
+        <form method="POST">
+            Smoothien nimi:<br/>
+            <select name="annos">-</select><br/>
+            Lisättävä raaka-aine:<br/>
+            <select name="raakaAine">-</select><br/>
+            Järjestys<br/>
+            <input type="text" name="jarestys"/><br/>
+            Määrä<br/>
+            <input type="text" name="maara"/><br/>
+            Ohje<br/>
+            <input type="text" name="ohje"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+        <a href="/">Takaisin</a>
+    </body>
+</html>
