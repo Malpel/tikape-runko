@@ -8,10 +8,13 @@
 
     <body>
         <h2>Smoothiet</h2>
-
-        <ul th:each="annos: ${annokset}">
-            <li><span th:text="${annos.nimi}">smoothie</span></li>
-        </ul>
+        <form>
+            <ul th:each="annos: ${smoothiet}">
+                <li><a th:href="@{~/smoothiet/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">smoothie</span></a>
+                     <a th:href="@{~/smoothiet/{id}/poista(id=${annos.id})}"><span th:text="(poista)">smoothie</span></a>
+                </li>
+            </ul>
+        </form>
 
         <h4>Lisää uusi</h4>
 

@@ -106,11 +106,13 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
 
     public List<RaakaAine> findAllById(Integer id) throws SQLException {
+        List<RaakaAine> raakaAineet = new ArrayList<>();
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine "
+                + "INNER JOIN AnnosRaakaAine ON AnnosRaakaAine.raaka_aine_id = ?");
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
-        List<RaakaAine> raakaAineet = new ArrayList<>();
+        
         while (rs.next()) {
             String nimi = rs.getString("nimi");
             raakaAineet.add(new RaakaAine(id, nimi));
@@ -119,7 +121,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         rs.close();
         stmt.close();
         connection.close();
-
+        
         return raakaAineet;
     }
 

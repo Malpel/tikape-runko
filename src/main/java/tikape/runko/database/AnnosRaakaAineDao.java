@@ -30,7 +30,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
         Integer raakaAineId = rs.getInt("raaka_aine_id");
         Integer annosId = rs.getInt("annos_id");
-        Integer jarjestys = rs.getInt("jarjestys");
+        String jarjestys = rs.getString("jarjestys");
         String maara = rs.getString("maara");
         String ohje = rs.getString("ohje");
 
@@ -55,7 +55,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
             Integer raakaAineId = rs.getInt("raaka_aine_id");
             Integer annosId = rs.getInt("annos_id");
-            Integer jarjestys = rs.getInt("jarjestys");
+            String jarjestys = rs.getString("jarjestys");
             String maara = rs.getString("maara");
             String ohje = rs.getString("ohje");
 
@@ -77,7 +77,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
                     "INSERT INTO AnnosRaakaAine (raaka_aine_id, annos_id, jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, object.getRaakaAineId());
             stmt.setInt(2, object.getAnnosId());
-            stmt.setInt(3, object.getJarjestys());
+            stmt.setString(3, object.getJarjestys());
             stmt.setString(4, object.getMaara());
             stmt.setString(5, object.getOhje());
             stmt.executeUpdate();

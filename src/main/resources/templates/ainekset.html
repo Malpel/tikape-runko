@@ -10,18 +10,23 @@
     <body>
         <h2>Raaka-aineet</h2>
 
-        <ul>
-            <li th:each="raakaAine: ${raakaAineet}">
-                <span th:text="${raakaAine.nimi}">raaka-aine</span>
-            </li>
-        </ul>
-        
+        <form method="POST" action="/ainekset" id="poisto">
+            <ul>
+                <li th:each="raakaAine: ${raakaAineet}">
+                    
+                    <span th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">raaka-aine </span> 
+                                
+                   <a th:href="@{~/ainekset/{id}/poista(id=${raakaAine.id})}"><span th:text="(poista)">smoothie</span></a>
+                </li>
+            </ul>
+        </form>
+
         <h4>Lisää uusi raaka-aine</h4>
-        
-        <form method="POST">
+
+        <form method="POST" action="/ainekset" id="lisays">
             Raaka-aineen nimi:<br/>
             <input type="text" name="aine" required="required" /><br/>
-            <input type="submit" value="Lisää"/><br/>
+            <input type="submit" value="Lisää" form="lisays"/><br/>
         </form>
         <br/>
         <a href="/">Takaisin</a>

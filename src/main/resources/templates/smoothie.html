@@ -11,12 +11,15 @@
     <body>
         <h2 th:text="${smoothie.nimi}">Smoothien nimi</h2>
 
-        
+
         <ul>
             <li th:each="raakaAine: ${raakaAineet}">
-                <span th:text="${raakaAine.nimi}">Task</span>
+                <span th:text="${raakaAine.nimi}">raaka-aine</span>
             </li>
         </ul>
 
+        <ul>
+            <a href="../../"><li>Listaukseen</li></a>
+        </ul>
     </body>
 </html>

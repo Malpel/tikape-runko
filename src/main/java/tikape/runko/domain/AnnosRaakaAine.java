@@ -1,16 +1,16 @@
 package tikape.runko.domain;
 
 public class AnnosRaakaAine {
-
-    private Integer raakaAineId;
+    
     private Integer AnnosId;
-    private Integer jarjestys;
+    private Integer raakaAineId;
+    private String jarjestys;
     private String maara;
     private String ohje;
 
-    public AnnosRaakaAine(Integer AnnosId, Integer raakaAineId, Integer jarjestys, String maara, String ohje) {
-        this.raakaAineId = raakaAineId;
+    public AnnosRaakaAine(Integer AnnosId, Integer raakaAineId, String jarjestys, String maara, String ohje) {
         this.AnnosId = AnnosId;
+        this.raakaAineId = raakaAineId;      
         this.jarjestys = jarjestys;
         this.maara = maara;
         this.ohje = ohje;
@@ -32,11 +32,11 @@ public class AnnosRaakaAine {
         this.AnnosId = AnnosId;
     }
 
-    public Integer getJarjestys() {
+    public String getJarjestys() {
         return jarjestys;
     }
 
-    public void setJarjestys(Integer jarjestys) {
+    public void setJarjestys(String jarjestys) {
         this.jarjestys = jarjestys;
     }
 
