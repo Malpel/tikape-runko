@@ -5,10 +5,10 @@ public class AnnosRaakaAine {
     private Integer raakaAineId;
     private Integer AnnosId;
     private Integer jarjestys;
-    private Integer maara;
+    private String maara;
     private String ohje;
 
-    public AnnosRaakaAine(Integer AnnosId, Integer raakaAineId, Integer jarjestys, Integer maara, String ohje) {
+    public AnnosRaakaAine(Integer AnnosId, Integer raakaAineId, Integer jarjestys, String maara, String ohje) {
         this.raakaAineId = raakaAineId;
         this.AnnosId = AnnosId;
         this.jarjestys = jarjestys;
@@ -40,11 +40,11 @@ public class AnnosRaakaAine {
         this.jarjestys = jarjestys;
     }
 
-    public Integer getMaara() {
+    public String getMaara() {
         return maara;
     }
 
-    public void setMaara(Integer maara) {
+    public void setMaara(String maara) {
         this.maara = maara;
     }
 

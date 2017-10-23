@@ -19,7 +19,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     @Override
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -31,7 +31,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         Integer raakaAineId = rs.getInt("raaka_aine_id");
         Integer annosId = rs.getInt("annos_id");
         Integer jarjestys = rs.getInt("jarjestys");
-        Integer maara = rs.getInt("maara");
+        String maara = rs.getString("maara");
         String ohje = rs.getString("ohje");
 
         AnnosRaakaAine ara = new AnnosRaakaAine(annosId, raakaAineId, jarjestys, maara, ohje);
@@ -47,7 +47,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public List<AnnosRaakaAine> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine");
 
         ResultSet rs = stmt.executeQuery();
         List<AnnosRaakaAine> arat = new ArrayList<>();
@@ -56,7 +56,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
             Integer raakaAineId = rs.getInt("raaka_aine_id");
             Integer annosId = rs.getInt("annos_id");
             Integer jarjestys = rs.getInt("jarjestys");
-            Integer maara = rs.getInt("maara");
+            String maara = rs.getString("maara");
             String ohje = rs.getString("ohje");
 
             arat.add(new AnnosRaakaAine(annosId, raakaAineId, jarjestys, maara, ohje));
@@ -70,9 +70,23 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     }
 
     @Override
-    public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine ara) throws SQLException{
-        return ara;
+    public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine object) throws SQLException {
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO AnnosRaakaAine (raaka_aine_id, annos_id, jarjestys, maara, ohje) VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, object.getRaakaAineId());
+            stmt.setInt(2, object.getAnnosId());
+            stmt.setInt(3, object.getJarjestys());
+            stmt.setString(4, object.getMaara());
+            stmt.setString(5, object.getOhje());
+            stmt.executeUpdate();
+        }
+
+        return null;
+       
     }
+    
 
     @Override
     public void delete(Integer key) throws SQLException {

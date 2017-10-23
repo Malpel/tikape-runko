@@ -72,8 +72,37 @@ public class AnnosDao implements Dao<Annos, Integer> {
     }
 
     @Override
-    public Annos saveOrUpdate(Annos Object) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Annos saveOrUpdate(Annos object) throws SQLException {
+        // tallenetaan vain jos saman nimisiä ei ole tallennettu jo
+
+        Annos byName = findByName(object.getNimi());
+
+        if (byName != null) {
+            return byName;
+        }
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (nimi) VALUES (?)");
+            stmt.setString(1, object.getNimi());
+            stmt.executeUpdate();
+        }
+
+        return findByName(object.getNimi());
+
+    }
+
+    private Annos findByName(String name) throws SQLException {
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Annos WHERE nimi = ?");
+            stmt.setString(1, name);
+
+            ResultSet result = stmt.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+
+            return new Annos(result.getInt(1), result.getString(2));
+        }
     }
 
 }

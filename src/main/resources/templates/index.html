@@ -10,7 +10,7 @@
         <h2>Smoothielista</h2><br/>
         <ul>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}">smoothie</span></li>
+                <a th:href="@{~/smoothiet/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">smoothie</span></a></li>
         </ul>
 
         <ul>
