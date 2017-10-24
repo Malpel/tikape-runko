@@ -21,6 +21,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Database database = new Database("jdbc:sqlite:db/smoothiet.db");
 
+        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
+
         AnnosDao annokset = new AnnosDao(database);
         RaakaAineDao raakaAineet = new RaakaAineDao(database);
         AnnosRaakaAineDao annosRaakaAine = new AnnosRaakaAineDao(database);
