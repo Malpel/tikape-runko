@@ -1,4 +1,4 @@
-# tikape-runko
+# Tikape-projekti
 
 Tietokantojen perusteet -kurssilla tehtävä web-sovellus.
 
