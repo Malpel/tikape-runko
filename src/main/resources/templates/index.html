@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
@@ -7,15 +7,15 @@
     </head>
 
     <body>
-        <h2>Smoothielista</h2><br/>
+        <h2>Smoothielista</h2>
         <ul>
             <li th:each="annos: ${annokset}">
                 <a th:href="@{~/smoothiet/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">smoothie</span></a></li>
         </ul>
 
         <ul>
-        <li><a href="/smoothiet">Lisää uusi tai muokkaa vanhoja</a></li>
-        <li><a href="/ainekset">Raaka-aineet</a></li>
+        <li><a href="/smoothiet">Luo uusi smoothie</a></li>
+        <li><a href="/ainekset">Tarkastele ja lisää aineksia</a></li>
         </ul>
     </body>
 </html>

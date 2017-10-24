@@ -1,6 +1,7 @@
 package tikape.runko;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import spark.ModelAndView;
@@ -33,7 +34,9 @@ public class Main {
 
         Spark.get("/ainekset", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("raakaAineet", raakaAineet.findAll());
+            List<RaakaAine> jarjestys = raakaAineet.findAll();
+            Collections.sort(jarjestys);
+            map.put("raakaAineet", jarjestys);
 
             return new ModelAndView(map, "ainekset");
         }, new ThymeleafTemplateEngine());
@@ -54,15 +57,15 @@ public class Main {
             res.redirect("/ainekset");
             return "";
         });
-        
+
         Spark.get("/smoothiet/:id/poista", (req, res) -> {
             HashMap map = new HashMap<>();
 
             annokset.delete(Integer.parseInt(req.params("id")));
+            annosRaakaAine.delete(Integer.parseInt(req.params("id")));
             res.redirect("/smoothiet");
             return "";
         });
-        
 
         Spark.get("/smoothiet", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -73,7 +76,6 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         Spark.post("/smoothiet", (req, res) -> {
-            System.out.println(req.queryParams());
             if (req.queryParams().contains("smoothieNimi")) {
                 Annos annos = new Annos(-1, req.queryParams("smoothieNimi"));
                 annokset.saveOrUpdate(annos);
@@ -93,27 +95,21 @@ public class Main {
 
         });
 
-        Spark.get("/smoothiet/:id", (req, res) -> {     
+        Spark.get("/smoothiet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
+            List<String> ohjelista = new ArrayList<>();
             map.put("smoothie", annokset.findOne(Integer.parseInt(req.params("id"))));
 
             AnnosRaakaAine kysytty = annosRaakaAine.findOne(Integer.parseInt(req.params("id")));
             if (kysytty != null) {
+                System.out.println(kysytty.getAnnosId());
                 map.put("raakaAineet", raakaAineet.findAllById(kysytty.getAnnosId()));;
+
+                map.put("ohjeet", ohjelista);
             }
 
             return new ModelAndView(map, "smoothie");
         }, new ThymeleafTemplateEngine());
 
-        /*
-        
-
-        get("/opiskelijat/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
-
-            return new ModelAndView(map, "opiskelija");
-        }, new ThymeleafTemplateEngine());
-         */
     }
 }

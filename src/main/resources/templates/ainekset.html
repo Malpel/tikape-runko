@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
@@ -10,16 +10,16 @@
     <body>
         <h2>Raaka-aineet</h2>
 
-        <form method="POST" action="/ainekset" id="poisto">
-            <ul>
-                <li th:each="raakaAine: ${raakaAineet}">
-                    
-                    <span th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">raaka-aine </span> 
-                                
-                   <a th:href="@{~/ainekset/{id}/poista(id=${raakaAine.id})}"><span th:text="(poista)">smoothie</span></a>
-                </li>
-            </ul>
-        </form>
+
+        <ul>
+            <li th:each="raakaAine: ${raakaAineet}">
+
+                <span th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">raaka-aine </span> 
+
+                <a th:href="@{~/ainekset/{id}/poista(id=${raakaAine.id})}">(<span th:text="poista">smoothie</span>)</a>
+            </li>
+        </ul>
+
 
         <h4>Lisää uusi raaka-aine</h4>
 
@@ -29,6 +29,11 @@
             <input type="submit" value="Lisää" form="lisays"/><br/>
         </form>
         <br/>
-        <a href="/">Takaisin</a>
+        <ul>
+            <li>
+                <a href="/">Smoothielistaukseen</a>
+            </li>
+        </ul>
+
     </body>
 </html>

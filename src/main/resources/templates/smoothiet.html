@@ -8,13 +8,14 @@
 
     <body>
         <h2>Smoothiet</h2>
-        <form>
-            <ul th:each="annos: ${smoothiet}">
-                <li><a th:href="@{~/smoothiet/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">smoothie</span></a>
-                     <a th:href="@{~/smoothiet/{id}/poista(id=${annos.id})}"><span th:text="(poista)">smoothie</span></a>
-                </li>
-            </ul>
-        </form>
+
+        <ul >
+            <li th:each="annos: ${smoothiet}">
+                <a th:href="@{~/smoothiet/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">smoothie</span></a>
+                <a th:href="@{~/smoothiet/{id}/poista(id=${annos.id})}">(<span th:text="poista">poista</span>)</a>
+            </li>
+        </ul>
+
 
         <h4>Lisää uusi</h4>
 
@@ -47,6 +48,11 @@
             <input type="submit" value="Lisää" form="lisaaAineita"/>
         </form>
 
-        <a href="/">Takaisin</a>
+        <ul>
+            <li>
+                <a href="/">Smoothielistaukseen</a>
+            </li>
+        </ul>
+
     </body>
 </html>
