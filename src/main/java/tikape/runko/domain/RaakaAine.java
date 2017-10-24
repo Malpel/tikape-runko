@@ -1,6 +1,6 @@
 package tikape.runko.domain;
 
-public class RaakaAine implements Comparable<RaakaAine> {
+public class RaakaAine implements Comparable<RaakaAine>{
 
     private Integer id;
     private String nimi;
@@ -28,8 +28,9 @@ public class RaakaAine implements Comparable<RaakaAine> {
 
     @Override
     public int compareTo(RaakaAine t) {
-
+        
         return this.nimi.compareTo(t.getNimi());
     }
+    
 
 }

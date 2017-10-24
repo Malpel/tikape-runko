@@ -1,16 +1,16 @@
 package tikape.runko.domain;
 
-public class AnnosRaakaAine {
-    
+public class AnnosRaakaAine implements Comparable<AnnosRaakaAine> {
+
     private Integer AnnosId;
     private Integer raakaAineId;
-    private String jarjestys;
+    private Integer jarjestys;
     private String maara;
     private String ohje;
 
-    public AnnosRaakaAine(Integer AnnosId, Integer raakaAineId, String jarjestys, String maara, String ohje) {
+    public AnnosRaakaAine(Integer AnnosId, Integer raakaAineId, Integer jarjestys, String maara, String ohje) {
         this.AnnosId = AnnosId;
-        this.raakaAineId = raakaAineId;      
+        this.raakaAineId = raakaAineId;
         this.jarjestys = jarjestys;
         this.maara = maara;
         this.ohje = ohje;
@@ -32,11 +32,11 @@ public class AnnosRaakaAine {
         this.AnnosId = AnnosId;
     }
 
-    public String getJarjestys() {
+    public Integer getJarjestys() {
         return jarjestys;
     }
 
-    public void setJarjestys(String jarjestys) {
+    public void setJarjestys(Integer jarjestys) {
         this.jarjestys = jarjestys;
     }
 
@@ -54,6 +54,11 @@ public class AnnosRaakaAine {
 
     public void setOhje(String ohje) {
         this.ohje = ohje;
+    }
+
+    @Override
+    public int compareTo(AnnosRaakaAine t) {
+        return this.jarjestys.compareTo(t.getJarjestys());
     }
 
 }

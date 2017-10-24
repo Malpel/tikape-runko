@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import tikape.runko.domain.RaakaAine;
 
 public class RaakaAineDao implements Dao<RaakaAine, Integer> {
@@ -59,7 +60,8 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         rs.close();
         stmt.close();
         connection.close();
-        
+        Collections.sort(raakaAineet);
+
         return raakaAineet;
     }
 
@@ -104,41 +106,6 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
             return new RaakaAine(result.getInt(1), result.getString(2));
         }
-    }
-
-    public List<String> findAllById(Integer annos_id) throws SQLException {
-        List<String> aineJaOhje = new ArrayList<>();
-        Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine, AnnosRaakaAine "
-                + "WHERE AnnosRaakaAine.annos_id = ? "
-                + "AND AnnosRaakaAine.raaka_aine_id = RaakaAine.id");
-        stmt.setInt(1, annos_id);
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            
-            String rivi = rs.getString("nimi");
-            
-            if (!rs.getString("jarjestys").isEmpty()) {
-                rivi +=  ", " + (rs.getString("jarjestys"));
-            }
-
-            if (!rs.getString("maara").isEmpty()) {
-                rivi += ", " + (rs.getString("maara"));
-            }
-
-            if (!rs.getString("ohje").isEmpty()) {
-                rivi += ", " + (rs.getString("ohje"));
-            }
-
-            aineJaOhje.add(rivi);
-        }
-
-        rs.close();
-        stmt.close();
-        connection.close();
-
-        return aineJaOhje;
     }
 
 }

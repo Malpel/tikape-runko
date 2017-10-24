@@ -34,9 +34,8 @@ public class Main {
 
         Spark.get("/ainekset", (req, res) -> {
             HashMap map = new HashMap<>();
-            List<RaakaAine> jarjestys = raakaAineet.findAll();
-            Collections.sort(jarjestys);
-            map.put("raakaAineet", jarjestys);
+
+            map.put("raakaAineet", raakaAineet.findAll());
 
             return new ModelAndView(map, "ainekset");
         }, new ThymeleafTemplateEngine());
@@ -84,7 +83,7 @@ public class Main {
                 AnnosRaakaAine ara = new AnnosRaakaAine(
                         Integer.parseInt(req.queryParams("annos")),
                         Integer.parseInt(req.queryParams("raakaAine")),
-                        req.queryParams("jarjestys"),
+                        Integer.parseInt(req.queryParams("jarjestys")),
                         req.queryParams("maara"),
                         req.queryParams("ohje"));
                 annosRaakaAine.saveOrUpdate(ara);
@@ -97,16 +96,9 @@ public class Main {
 
         Spark.get("/smoothiet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            List<String> ohjelista = new ArrayList<>();
+
             map.put("smoothie", annokset.findOne(Integer.parseInt(req.params("id"))));
-
-            AnnosRaakaAine kysytty = annosRaakaAine.findOne(Integer.parseInt(req.params("id")));
-            if (kysytty != null) {
-                System.out.println(kysytty.getAnnosId());
-                map.put("raakaAineet", raakaAineet.findAllById(kysytty.getAnnosId()));;
-
-                map.put("ohjeet", ohjelista);
-            }
+            map.put("raakaAineet", annosRaakaAine.findAllById(Integer.parseInt(req.params("id"))));;
 
             return new ModelAndView(map, "smoothie");
         }, new ThymeleafTemplateEngine());
